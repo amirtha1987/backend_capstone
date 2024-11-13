@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express")
 const mongoose = require('mongoose')
 
@@ -39,6 +40,6 @@ mongoose.connect('mongodb://0.0.0.0:27017/user')
 
 
 
-app.listen(3001, () => {
+app.listen(process.env.PORT, () => {
     console.log("server is Running");
 })
