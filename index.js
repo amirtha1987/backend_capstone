@@ -20,26 +20,17 @@ app.use(cors({
 
 
 app.use('/', (req, res) => {
-    res.json({
-        status: "ApI working fine",
-        code:200
+    res.send("Api is working fine")
     })
 
-})
+
 app.use(cookieParser())
 app.use(express.json());
 app.use('/auth', userRouter)
 app.use('/pet', petRouter)
 
 
-mongoose.connect('mongodb://0.0.0.0:27017/user')
-
-
-
-
-
-
-
+//mongoose.connect('mongodb://0.0.0.0:27017/user')
 app.listen(process.env.PORT, () => {
     console.log("server is Running");
 })
