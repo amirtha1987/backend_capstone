@@ -30,7 +30,7 @@ app.use('/auth', userRouter)
 app.use('/pet', petRouter)
 
 
-//mongoose.connect('mongodb://0.0.0.0:27017/user')
+mongoose.connect('mongodb://0.0.0.0:27017/user')
 app.listen(process.env.PORT, () => {
     console.log("server is Running");
 })
