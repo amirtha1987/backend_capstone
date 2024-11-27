@@ -11,12 +11,13 @@ const petRouter = require('./Routes/petr')
 const PORT = process.env.PORT || 3001
 const app = express()
 
-app.use(cors({
-
-    origin: ["http://localhost:5173"],
-    methods: ["GET", "POST","PUT"],
-    credentials: true
-}))
+app.use(
+  cors({
+    origin: [" https://amirtha1987.github.io/capstone/"],
+    methods: ["GET", "POST", "PUT"],
+    credentials: true,
+  })
+);
 
 
 app.use('/', (req, res) => {
