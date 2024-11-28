@@ -13,7 +13,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: [" https://amirtha1987.github.io/capstone/"],
+    origin: [" http://localhost:5173"],
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   })
