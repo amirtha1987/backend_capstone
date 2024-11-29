@@ -31,7 +31,23 @@ app.use('/auth', userRouter)
 app.use('/pet', petRouter)
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/user')
-app.listen(process.env.PORT, () => {
-    console.log("server is Running");
-})
+// mongoose.connect('process.env.MONGO_URI')
+// app.listen(process.env.PORT, () => {
+//     console.log("server is Running");
+// })
+
+
+mongoose
+  .connect(process.env.MONGO_URI, {})
+  .then((result) => {
+    console.log("db conntected");
+    app.listen(PORT, () => {
+      console.log(`Example app listening on port ${PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
+
+
+
+
+
