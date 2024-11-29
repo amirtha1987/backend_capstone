@@ -10,6 +10,7 @@ const petRouter = require('./Routes/petr')
 
 const PORT = process.env.PORT || 3001
 const app = express()
+app.use(cors());
 
 app.use(
   cors({
@@ -40,7 +41,7 @@ app.use('/pet', petRouter)
 mongoose
   .connect(process.env.MONGO_URI, {})
   .then((result) => {
-    console.log("db conntected");
+    console.log("db connected");
     app.listen(PORT, () => {
       console.log(`Example app listening on port ${PORT}`);
     });
