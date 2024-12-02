@@ -11,7 +11,6 @@ router.post('/create-pet', (req, res) => {
         breed: req.body.breed,
         special_care_required: req.body.special_care_required,
         imageUrl: req.body.imageUrl,
-        userId: req.body.userId
     }).then(result => {
         return res.json(result)
     }).catch(err =>
