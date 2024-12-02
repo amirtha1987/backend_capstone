@@ -31,6 +31,8 @@ app.use("/pet", petRouter);
 app.get("/", (req, res) => {
   res.send("API is working fine");
 });
+app.options("*", cors());
+
 
 // MongoDB Connection and Server Start
 mongoose
