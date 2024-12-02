@@ -3,7 +3,7 @@ const PetModel = require('../models/Pet')
 const UserModel = require('../models/User')
 const router = express.Router()
 
-router.post('/create-pets', (req, res) => {
+router.post('/create-pet', (req, res) => {
     PetModel.create({
         name: req.body.name,
         age: req.body.age,
