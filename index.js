@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use(
   cors({
-    origin: [" http://localhost:5173"],
+    origin: [" https://amirtha1987.github.io"],
     methods: ["GET", "POST", "PUT"],
     credentials: true,
   })
