@@ -33,6 +33,12 @@ app.get("/", (req, res) => {
 });
 app.options("*", cors());
 
+app.use((req, res, next) => {
+  req.url = req.url.replace(/\/$/, ""); // Remove trailing slash
+  next();
+});
+
+
 
 // MongoDB Connection and Server Start
 mongoose
