@@ -76,7 +76,7 @@ const UserModel = require("../models/User");
 const router = express.Router();
 
 // Create a pet
-router.post("/create-pet", async (req, res) => {
+router.post("/api/create-pet", async (req, res) => {
   try {
     const pet = await PetModel.create(req.body);
     res.status(201).json(pet);
