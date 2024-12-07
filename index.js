@@ -25,7 +25,7 @@ app.use(express.json());
 
 // Routes
 app.use("/auth", userRouter);
-app.use("/pet", petRouter);
+app.use("/api/pet", petRouter);
 
 // Default Route
 app.get("/", (req, res) => {
@@ -47,9 +47,7 @@ app.use('/api', petRouter); // Adjust the base path if needed
 // MongoDB Connection and Server Start
 mongoose
   .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+     })
   .then(() => {
     console.log("Database connected successfully");
     app.listen(PORT, () => {
