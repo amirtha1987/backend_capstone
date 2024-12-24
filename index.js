@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 //const cookieParser = require("cookie-parser");
 
 //const userRouter = require("./Routes/auth");
-//const petRouter = require("./Routes/petr");
+const petRouter = require("./Routes/petr");
 
 const app = express();
 
@@ -20,11 +20,11 @@ const app = express();
 
 // // Middleware
 // app.use(cookieParser());
-// app.use(express.json());
+app.use(express.json());
 
 // // Routes
 // app.use("/auth", userRouter);
-// app.use("/pet", petRouter);
+app.use("/api/pets", petRouter);
 
 // // Default Route
 // app.get("/", (req, res) => {
@@ -40,16 +40,15 @@ app.use((req, res, next) => {
 
 
 
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello world");
+// });
 // DB Connection and Server Start
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log("DB connected Sucessfully and listening to " + process.env.PORT);
     });
-  })
-  .catch((err) => {
+  }).catch((err) => {
     console.error("Database connection error:", err);
   });

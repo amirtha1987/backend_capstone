@@ -71,27 +71,34 @@ const UserModel = require("../models/User");
 
 const router = express.Router();
 
-// Create a pet
-router.post("/pet/create-pet", async (req, res) => {
-  try {
-    const { name, age, species, breed, specialCareRequired, imageUrl} = req.body;
-    const newPet = new Pet({
-      name,
-      age,
-      species,
-      breed,
-      specialCareRequired,
-      imageUrl
-    });
-    const savedPet = await newPet.save();
-    res.status(201).json(savedPet);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to create pet." });
-  }
+const { createPet, getPets, getSinglepet, updatePet, deleteTask} = require("../controller/petController");
 
-  }
-);
+// Create a pet
+router.post("/", createPet);
+router.get("/", getPets);
+router.get("/:id", getSinglepet);
+router.patch("/:id", updatePet);
+router.delete("/:id", deleteTask);
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Get all pets
 router.get("/pets", async (req, res) => {
