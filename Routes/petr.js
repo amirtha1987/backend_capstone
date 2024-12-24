@@ -18,7 +18,6 @@
 
 // })
 
-
 // router.get('/pets', (req, res) => {
 //     PetModel.find()
 //         .then(pets => {
@@ -64,26 +63,35 @@
 //     return res.json({savedPets: user.savedPets})
 // })
 
-
-
 // module.exports = router;
 
-
 const express = require("express");
-const PetModel = require("../models/Pet");
+const Pet = require("../models/Pet");
 const UserModel = require("../models/User");
 
 const router = express.Router();
 
 // Create a pet
-router.post("/api/pet/create-pet", async (req, res) => {
+router.post("/pet/create-pet", async (req, res) => {
   try {
-    const pet = await PetModel.create(req.body);
-    res.status(201).json(pet);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to create pet", details: err });
+    const { name, age, species, breed, specialCareRequired, imageUrl} = req.body;
+    const newPet = new Pet({
+      name,
+      age,
+      species,
+      breed,
+      specialCareRequired,
+      imageUrl
+    });
+    const savedPet = await newPet.save();
+    res.status(201).json(savedPet);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to create pet." });
   }
-});
+
+  }
+);
 
 // Get all pets
 router.get("/pets", async (req, res) => {
