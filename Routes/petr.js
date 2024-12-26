@@ -1,23 +1,22 @@
-// const express = require('express')
-// const PetModel = require('../models/Pet')
+ const express = require('express')
+ const PetModel = require('../models/Pet');
+const Pet = require('../models/Pet');
 // const UserModel = require('../models/User')
-// const router = express.Router()
+ const router = express.Router()
 
-// router.post('/create-pet', (req, res) => {
-//     PetModel.create({
-//         name: req.body.name,
-//         age: req.body.age,
-//         species: req.body.species,
-//         breed: req.body.breed,
-//         special_care_required: req.body.special_care_required,
-//         imageUrl: req.body.imageUrl,
-//     }).then(result => {
-//         return res.json(result)
-//     }).catch(err =>
-//         console.log(err))
+router.post('/', async (req, res) => {
+  try {
+    const { name, age, species, breed, specialCareRequired, imageUrl } = req.body;
+     const pet = await PetModel.create({ name, age, species, breed, specialCareRequired, imageUrl })
+     res.status(201).json(newPet);
+  }
+  catch (error) {
+    res.status(500).json({ message: 'Failed to create pet', error });
+  };
 
-// })
-
+});
+module.exports = router;
+  
 // router.get('/pets', (req, res) => {
 //     PetModel.find()
 //         .then(pets => {
@@ -63,24 +62,25 @@
 //     return res.json({savedPets: user.savedPets})
 // })
 
+
+
+// const express = require("express");
+// const Pet = require("../models/Pet");
+// const UserModel = require("../models/User");
+
+// const router = express.Router();
+
+// const { createPet, getPets, getSinglepet, updatePet, deletePet} = require("../controller/petController");
+
+// // Create a pet
+// router.post("/", createPet);
+// router.get("/", getPets);
+// router.get("/:id", getSinglepet);
+// router.patch("/:id", updatePet);
+// router.delete("/:id", deletePet);
+
 // module.exports = router;
 
-const express = require("express");
-const Pet = require("../models/Pet");
-const UserModel = require("../models/User");
-
-const router = express.Router();
-
-const { createPet, getPets, getSinglepet, updatePet, deleteTask} = require("../controller/petController");
-
-// Create a pet
-router.post("/", createPet);
-router.get("/", getPets);
-router.get("/:id", getSinglepet);
-router.patch("/:id", updatePet);
-router.delete("/:id", deleteTask);
-
-module.exports = router;
 
 
 
@@ -99,74 +99,73 @@ module.exports = router;
 
 
 
+// // Get all pets
+// router.get("/pets", async (req, res) => {
+//   try {
+//     const pets = await PetModel.find();
+//     res.status(200).json(pets);
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to fetch pets", details: err });
+//   }
+// });
 
-// Get all pets
-router.get("/pets", async (req, res) => {
-  try {
-    const pets = await PetModel.find();
-    res.status(200).json(pets);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch pets", details: err });
-  }
-});
+// // Get a pet by ID
+// router.get("/pet-by-id/:id", async (req, res) => {
+//   try {
+//     const pet = await PetModel.findById(req.params.id);
+//     if (!pet) return res.status(404).json({ error: "Pet not found" });
+//     res.status(200).json(pet);
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to fetch pet", details: err });
+//   }
+// });
 
-// Get a pet by ID
-router.get("/pet-by-id/:id", async (req, res) => {
-  try {
-    const pet = await PetModel.findById(req.params.id);
-    if (!pet) return res.status(404).json({ error: "Pet not found" });
-    res.status(200).json(pet);
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch pet", details: err });
-  }
-});
+// // Get saved pets by user ID
+// router.get("/saved-pets/:id", async (req, res) => {
+//   try {
+//     const user = await UserModel.findById(req.params.id);
+//     if (!user) return res.status(404).json({ error: "User not found" });
+//     res.status(200).json({ savedPets: user.savedPets });
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to fetch saved pets", details: err });
+//   }
+// });
 
-// Get saved pets by user ID
-router.get("/saved-pets/:id", async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "User not found" });
-    res.status(200).json({ savedPets: user.savedPets });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch saved pets", details: err });
-  }
-});
+// // Get pets saved by a user
+// router.get("/user-pets/:id", async (req, res) => {
+//   try {
+//     const user = await UserModel.findById(req.params.id);
+//     if (!user) return res.status(404).json({ error: "User not found" });
 
-// Get pets saved by a user
-router.get("/user-pets/:id", async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.params.id);
-    if (!user) return res.status(404).json({ error: "User not found" });
+//     const pets = await PetModel.find({ _id: { $in: user.savedPets } });
+//     res.status(200).json(pets);
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ error: "Failed to fetch user's pets", details: err });
+//   }
+// });
 
-    const pets = await PetModel.find({ _id: { $in: user.savedPets } });
-    res.status(200).json(pets);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Failed to fetch user's pets", details: err });
-  }
-});
+// // Save a pet for a user
+// router.put("/save-pet", async (req, res) => {
+//   try {
+//     const { petId, userId } = req.body;
 
-// Save a pet for a user
-router.put("/save-pet", async (req, res) => {
-  try {
-    const { petId, userId } = req.body;
+//     const pet = await PetModel.findById(petId);
+//     if (!pet) return res.status(404).json({ error: "Pet not found" });
 
-    const pet = await PetModel.findById(petId);
-    if (!pet) return res.status(404).json({ error: "Pet not found" });
+//     const user = await UserModel.findById(userId);
+//     if (!user) return res.status(404).json({ error: "User not found" });
 
-    const user = await UserModel.findById(userId);
-    if (!user) return res.status(404).json({ error: "User not found" });
+//     if (!user.savedPets.includes(petId)) {
+//       user.savedPets.push(petId);
+//       await user.save();
+//     }
 
-    if (!user.savedPets.includes(petId)) {
-      user.savedPets.push(petId);
-      await user.save();
-    }
+//     res.status(200).json({ savedPets: user.savedPets });
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to save pet", details: err });
+//   }
+// });
 
-    res.status(200).json({ savedPets: user.savedPets });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to save pet", details: err });
-  }
-});
-
-module.exports = router;
+// module.exports = router;

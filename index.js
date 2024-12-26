@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-//const cors = require("cors");
+const cors = require("cors");
 //const cookieParser = require("cookie-parser");
 
 //const userRouter = require("./Routes/auth");
@@ -9,41 +9,34 @@ const petRouter = require("./Routes/petr");
 
 const app = express();
 
-// CORS Middleware
-// app.use(
-//   cors({
-//     origin: ["https://amirtha1987.github.io"], // Corrected extra space
-//     methods: ["GET", "POST", "PUT"],
-//     credentials: true,
-//   })
-// );
+ //CORS Middleware
+ app.use(cors());
 
 // // Middleware
 // app.use(cookieParser());
 app.use(express.json());
 
+const corsOptions = {
+  origin: ["http://localhost:3001", "https://amirtha1987.github.io/capstone/"],
+  optionsSuccessSatus: 200,
+};
+app.use(cors(corsOptions));
+
 // // Routes
 // app.use("/auth", userRouter);
-app.use("/api/pets", petRouter);
-
-// // Default Route
-// app.get("/", (req, res) => {
-//   res.send("API is working fine");
-// });
-// app.options("*", cors());
+app.use("api/pets", petRouter);
 
 app.use((req, res, next) => {
   console.log("path " + req.path + "method " + req.method);
   next();
+});
+ app.post('/api/pets', (req, res) => { // Handle the request to create a pet
+   res.status(201).send({ message: 'Pet created sucessfully' });
  });
 
 
 
 
-// app.get("/", (req, res) => {
-//   res.send("Hello world");
-// });
-// DB Connection and Server Start
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
