@@ -27,13 +27,13 @@ app.use(cors(corsOptions));
 
 // // Routes
 app.use("/auth", userRouter);
-app.use("api/pets", petRouter);
+app.use("api/pet", petRouter);
 
 app.use((req, res, next) => {
   console.log("path " + req.path + "method " + req.method);
   next();
 });
- app.post('/api/pets', (req, res) => { // Handle the request to create a pet
+ app.post('/api/pet', (req, res) => { // Handle the request to create a pet
    res.status(201).send({ message: 'Pet created sucessfully' });
  });
 
