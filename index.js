@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 //const cookieParser = require("cookie-parser");
 
-//const userRouter = require("./Routes/auth");
+const userRouter = require("./Routes/auth");
 const petRouter = require("./Routes/petr");
 
 const app = express();
@@ -26,7 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // // Routes
-// app.use("/auth", userRouter);
+app.use("/auth", userRouter);
 app.use("api/pets", petRouter);
 
 app.use((req, res, next) => {
