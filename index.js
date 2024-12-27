@@ -19,7 +19,7 @@ app.use(express.json());
 const corsOptions = {
   origin: [
     "http://localhost:3001",
-    "https://cheery-bavarois-aec17a.netlify.app/",
+    "https://cheery-bavarois-aec17a.netlify.app"
   ],
   optionsSuccessSatus: 200,
 };
