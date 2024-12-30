@@ -7,7 +7,7 @@ const UserModel = require('../models/User')
 router.post('/pet/create-pet', async (req, res) => {
   try {
     const { name, age, species, breed, specialCareRequired, imageUrl } = req.body;
-     const pet = await PetModel.create({ name, age, species, breed, specialCareRequired, imageUrl })
+     const Pet = await PetModel.create({ name, age, species, breed, specialCareRequired, imageUrl })
      res.status(201).json(newPet);
   }
   catch (error) {
