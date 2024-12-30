@@ -32,9 +32,9 @@ app.use((req, res, next) => {
   console.log("path " + req.path + "method " + req.method);
   next();
 });
- app.post('/create-pet', (req, res) => { // Handle the request to create a pet
-   res.status(201).send({ message: 'Pet created sucessfully' });
- });
+//  app.post('/create-pet', (req, res) => { // Handle the request to create a pet
+//    res.status(201).send({ message: 'Pet created sucessfully' });
+//  });
 
 
 

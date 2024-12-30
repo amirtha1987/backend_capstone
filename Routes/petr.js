@@ -1,14 +1,15 @@
  const express = require('express')
- const PetModel = require('../models/Pet');
+ //const PetModel = require('../models/Pet');
 const Pet = require('../models/Pet');
 const UserModel = require('../models/User')
  const router = express.Router()
 
-router.post('/create-pet', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { name, age, species, breed, specialCareRequired, imageUrl } = req.body;
-     const Pet = await PetModel.create({ name, age, species, breed, specialCareRequired, imageUrl })
-     res.status(201).json(newPet);
+    const newPet = new Pet({ name, age, species, breed, specialCareRequired, imageUrl });
+    const savedPet = await newPet.save();
+     res.status(201).json(savedPet);
   }
   catch (error) {
     res.status(500).json({ message: 'Failed to create pet', error });
