@@ -1,7 +1,7 @@
  const express = require('express')
  const PetModel = require('../models/Pet');
 const Pet = require('../models/Pet');
-// const UserModel = require('../models/User')
+const UserModel = require('../models/User')
  const router = express.Router()
 
 router.post('/pet/create-pet', async (req, res) => {
