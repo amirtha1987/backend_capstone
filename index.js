@@ -26,7 +26,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // // Routes
-app.use("/auth", userRouter);
+app.use("api/auth", userRouter);
 app.use("api/pet", petRouter);
 
 app.use((req, res, next) => {
