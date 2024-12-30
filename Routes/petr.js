@@ -4,7 +4,7 @@ const Pet = require('../models/Pet');
 const UserModel = require('../models/User')
  const router = express.Router()
 
-router.post('/pet/create-pet', async (req, res) => {
+router.post('/create-pet', async (req, res) => {
   try {
     const { name, age, species, breed, specialCareRequired, imageUrl } = req.body;
      const Pet = await PetModel.create({ name, age, species, breed, specialCareRequired, imageUrl })
