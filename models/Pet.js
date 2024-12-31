@@ -8,5 +8,5 @@ const PetSchema = new mongoose.Schema({
     specialCareRequired: { type: String },
     imageUrl: { type: String },
   })
-const PetModel = mongoose.model("pets", PetSchema)
+const PetModel = mongoose.model("pet", PetSchema)
 module.exports = PetModel;
