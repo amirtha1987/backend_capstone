@@ -1,11 +1,10 @@
  const express = require('express')
- //const PetModel = require('../models/Pet');
-const Pet = require('../models/Pet');
+ const PetModel = require('../models/Pet');
 const UserModel = require('../models/User')
  const router = express.Router()
 
-router.post('/create-pets', async (req, res) => {
-    Pet.create({
+router.post('/create-pet', async (req, res) => {
+    PetModel.create({
       name: req.body.name,
       age: req.body.age,
       species:req.body.species,
