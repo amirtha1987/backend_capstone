@@ -4,16 +4,17 @@ const Pet = require('../models/Pet');
 const UserModel = require('../models/User')
  const router = express.Router()
 
-router.post('/', async (req, res) => {
-  try {
-    const { name, age, species, breed, specialCareRequired, imageUrl } = req.body;
-    const newPet = new Pet({ name, age, species, breed, specialCareRequired, imageUrl });
-    const savedPet = await newPet.save();
-     res.status(201).json(savedPet);
-  }
-  catch (error) {
-    res.status(500).json({ message: 'Failed to create pet', error });
-  };
+router.post('/create-pets', async (req, res) => {
+    Pet.create({
+      name: req.body.name,
+      age: req.body.age,
+      species:req.body.species,
+      breed: req.body.breed,
+      specialCareRequired: req.body.specialCareRequired,
+      imageUrl: req.body.imageUrl,
+    }).then(result => {
+        return res.json(result)
+    }).catch(err => console.log(err))
 
 });
 
