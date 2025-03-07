@@ -10,7 +10,10 @@ const petRouter = require("./Routes/petr");
 const app = express();
 
  //CORS Middleware
- app.use(cors());
+const cors = require('cors');
+app.use(cors({
+   origin:'http://localhost:5173',
+ }));
 
 // // Middleware
 // app.use(cookieParser());
