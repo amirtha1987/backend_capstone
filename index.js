@@ -8,7 +8,6 @@ const userRouter = require("./Routes/auth");
 const petRouter = require("./Routes/petr");
 
 const app = express();
-const cors = require('cors');
 const allowedOrigins = ['http://localhost:5173',
                'https://cheery-bavarois-aec17a.netlify.app'];
 
