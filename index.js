@@ -8,20 +8,6 @@ const userRouter = require("./Routes/auth");
 const petRouter = require("./Routes/petr");
 
 const app = express();
-const allowedOrigins = ['https://cheery-bavarois-aec17a.netlify.app'];
-
- //CORS Middleware
-app.use(cors({
-  origin:(origin, callback) => {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-  
-  
- }));
 
 // // Middleware
 // app.use(cookieParser());
